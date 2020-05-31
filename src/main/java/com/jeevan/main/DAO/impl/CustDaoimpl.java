@@ -1,14 +1,8 @@
 package com.jeevan.main.DAO.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-
 import com.jeevan.main.DAO.CustDao;
 import com.jeevan.main.model.Customer;
 import com.jeevan.main.repository.CustRepository;
@@ -35,21 +29,7 @@ public class CustDaoimpl implements CustDao {
 
 	public Customer getBalanceByid(Integer id) {
 		System.out.println("in getBalanceByid DAO ");
-
-		List<Customer> tl = new ArrayList<Customer>();
-		tl = (List<Customer>) repo.findAll();
-
-		Iterator<Customer> it = tl.iterator();
-
-		while (it.hasNext()) {
-			Customer c = (Customer) it.next();
-			if (c.getAcno().equals(id)) {
-				return c;
-
-			}
-		}
-
-		return null;
+		return repo.findById(id).get();
 	}
 
 	public boolean verifyAccountByPin(Integer pin, Integer accNum) {
